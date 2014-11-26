@@ -12,12 +12,17 @@ class Scrapper():
 
     def __init__(self, url):
         self.url = url
+        self.title = ""
         pass
 
     def scrap(self):
         response = requests.get(self.url)
 
         soup = bs4.BeautifulSoup(response.text)
+        title = soup.find('title')
+
+        self.title = title.text.split('-')[0]
+
         links = soup.find_all('iframe')
         urls = []
         for link in links:
@@ -25,7 +30,11 @@ class Scrapper():
 
         return urls
 
+    def get_title(self):
+        return self.title
+
     def get_link(self, url):
+
         response = requests.get(url)
         soup = bs4.BeautifulSoup(response.text)
         javascript = soup.find_all('script')
