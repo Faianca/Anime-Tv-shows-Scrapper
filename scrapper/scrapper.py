@@ -8,16 +8,38 @@ import urllib
 
 class Scrapper():
 
-    url = ""
+    t = "http://playpanda.net/embed.php?w=600&h=438&vid=at/nw/terra_formars_-_09.mp4"
 
-    def __init__(self):
+    def __init__(self, url):
+        self.url = url
         pass
 
     def scrap(self):
-        response = requests.get("http://playpanda.net/embed.php?w=600&h=438&vid=at/nw/terra_formars_-_09.mp4")
+        response = requests.get(self.url)
 
         soup = bs4.BeautifulSoup(response.text)
-        links = soup.select('body')
+        links = soup.find_all('iframe')
+        urls = []
+        for link in links:
+            urls.append(self.get_link(link.get('src')))
 
-        file = re.search('(?P<url>https?://[^\s"]+)', str(links)).group("url")
-        return urllib.unquote(file).decode('utf8')
+        return urls
+
+    def get_link(self, url):
+        response = requests.get(url)
+        soup = bs4.BeautifulSoup(response.text)
+        javascript = soup.find_all('script')
+
+        urls = []
+
+        for script in javascript:
+
+            text = script.get_text()
+            url = re.search('(?P<url>https?://[^\s"]+)', str(text))
+
+            if url is None:
+                continue
+
+            urls.append(urllib.unquote(url.group("url")).decode('utf8'))
+
+        return urls

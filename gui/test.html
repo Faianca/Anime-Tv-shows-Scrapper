@@ -1,0 +1,32 @@
+
+        <html>
+            <head>
+                <script type="text/javascript" src="/home/jmeireles/PycharmProjects/anime/gui/jwplayer.js"></script>
+                <script type="text/javascript">jwplayer.key="sZhno26KBTT4wkrwM5dYR7Gv2ncG0T/DTjmDlQ==";</script>
+                <style>
+                    html {
+                        background: black;
+                    }
+
+                    body {
+                        width:400px;
+                        height:400px;
+                        margin:0
+                    }
+                </style>
+            </head>
+            <body>
+                    <div id="myElement">Loading the player...</div>
+
+                    <script type="text/javascript">
+                        jwplayer("myElement").setup({
+                            autostart: true,
+                            timeoutInSeconds: 20,
+                            height: 600,
+                            width: 800,
+                            file: "http://gateway2.play44.net/at/nw/hitsugi_no_chaika_-_avenging_battle_-_08.mp4?st=IQMsbzo5AlQw5HvFMqMEfA&e=1417044048&server=play44"
+                        });
+                    </script>
+            </body>
+            </html>
+        
