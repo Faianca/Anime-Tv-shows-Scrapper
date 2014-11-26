@@ -21,7 +21,7 @@ class Scrapper():
         soup = bs4.BeautifulSoup(response.text)
         title = soup.find('title')
 
-        self.title = title.text.split('-')[0]
+        self.title = title.text.split(' - ')[0]
 
         links = soup.find_all('iframe')
         urls = []

@@ -15,7 +15,7 @@ class Main():
     def __init__(self):
         self.window = Gtk()
         self.browser = Browser()
-        self.scrapper = Scrapper("http://www.animehere.com/highschool-of-the-dead-episode-12.html")
+        self.scrapper = Scrapper("http://www.animehere.com/psychopass-2-episode-7.html")
         self.html = Html()
 
     def start(self):
@@ -37,7 +37,7 @@ class Main():
         self.window.add(self.browser.get())
         self.window.show_all()
 
-    
+
 gobject.threads_init()
 main = Main()
 main.start()
