@@ -21,11 +21,17 @@ class Gtk():
     def set_title(self, title):
         self.win.set_title(title)
 
+    def hide(self):
+        self.win.hide()
+
     def resize(self, width, height):
         self.win.set_size_request(width, height)
 
     def add(self, object):
         self.win.add(object)
+
+    def show(self):
+        self.win.show()
 
     def show_all(self):
         self.win.show_all()

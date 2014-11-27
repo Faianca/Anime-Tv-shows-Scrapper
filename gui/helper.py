@@ -5,6 +5,12 @@ import requests
 
 class Helper():
 
+    codes = [
+        200,
+        301,
+        302
+    ]
+
     @staticmethod
     def get_resource_path(rel_path):
         dir_of_py_file = os.path.dirname(__file__)
@@ -14,4 +20,5 @@ class Helper():
     @staticmethod
     def exists(url):
         r = requests.head(url)
-        return r.status_code == requests.codes.ok
+
+        return r.status_code in Helper.codes

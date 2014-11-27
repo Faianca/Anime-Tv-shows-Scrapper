@@ -13,12 +13,39 @@ from gui.helper import Helper
 class Main():
 
     def __init__(self):
+        self.box = ''
+        self.scrapper = ''
         self.window = Gtk()
+        #self.mainWindow = Gtk()
         self.browser = Browser()
-        self.scrapper = Scrapper("http://www.animehere.com/psychopass-2-episode-7.html")
         self.html = Html()
 
-    def start(self):
+
+    def clicked(self, widget):
+        self.mainWindow.hide()
+        self.start(self.box.get_text())
+
+    def go(self):
+        self.mainWindow.resize(800, 600)
+        self.mainWindow.set_resizable(False)
+        self.mainWindow.set_title("Faianca Entertainment")
+
+        button = gtk.Button("go")
+        button.connect("clicked", self.clicked)
+
+        self.box = gtk.Entry()
+
+        hbox = gtk.HBox()
+        hbox.set_size_request(200,200)
+        hbox.pack_start(self.box)
+        hbox.pack_start(button)
+
+        self.mainWindow.add(hbox)
+
+        self.mainWindow.show_all()
+
+    def start(self, url):
+        self.scrapper = Scrapper(url)
         urls = self.scrapper.scrap()
 
         link = None
@@ -40,5 +67,5 @@ class Main():
 
 gobject.threads_init()
 main = Main()
-main.start()
+main.start("http://www.animehere.com/psychopass-2-episode-3.html")
 gtk.main()
