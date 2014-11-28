@@ -40,7 +40,7 @@ class Html():
             </html>
         ''')
 
-    def open(self, url):
+    def create(self, url):
         jwplayer = Helper.get_resource_path("jwplayer.js")
         values = {'url': url, 'jwplayer': jwplayer}
         html = self.html.substitute(values)

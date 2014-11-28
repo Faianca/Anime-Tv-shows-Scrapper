@@ -4,9 +4,8 @@ __author__ = 'jmeireles'
 import gtk
 import gobject
 from gui.gtk_c import Gtk
-from gui.browser import Browser
+from gui.player import Player
 from scrapper.scrapper import Scrapper
-from gui.html import Html
 from gui.helper import Helper
 
 
@@ -17,8 +16,7 @@ class Main():
         self.scrapper = ''
         self.window = Gtk()
         self.mainWindow = Gtk()
-        self.browser = Browser()
-        self.html = Html()
+        self.player = Player()
 
 
     def clicked(self, widget):
@@ -55,15 +53,8 @@ class Main():
                 link = url[0]
                 break
 
-        movie = self.html.open(link)
-
-        self.browser.open(movie)
-        self.window.resize(800, 600)
-        self.window.set_resizable(False)
-        self.window.set_title(self.scrapper.get_title())
-        self.window.add(self.browser.get())
-        self.window.show_all()
-
+        self.player.set_title(self.scrapper.get_title())
+        self.player.open(link)
 
 gobject.threads_init()
 main = Main()
