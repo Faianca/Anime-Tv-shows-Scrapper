@@ -16,7 +16,7 @@ class Main():
         self.box = ''
         self.scrapper = ''
         self.window = Gtk()
-        #self.mainWindow = Gtk()
+        self.mainWindow = Gtk()
         self.browser = Browser()
         self.html = Html()
 
@@ -67,5 +67,6 @@ class Main():
 
 gobject.threads_init()
 main = Main()
-main.start("http://www.animehere.com/psychopass-2-episode-3.html")
+main.go()
+#main.start("http://www.animehere.com/psychopass-2-episode-3.html")
 gtk.main()

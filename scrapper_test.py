@@ -1,22 +1,21 @@
 __author__ = 'jmeireles'
-
 import bs4
 import requests
 import re
 import urllib
 import os
+import yaml
 from gui.helper import Helper
 import json
 from tld import get_tld
-
 
 class Scrapper():
 
     t = "http://playpanda.net/embed.php?w=600&h=438&vid=at/nw/terra_formars_-_09.mp4"
     valid_extensions = ['.mp4', '.flv']
 
-    def __init__(self, url):
-        self.url = url
+    def __init__(self):
+        self.url = "http://www.animehere.com/psychopass-2-episode-3.html"
         self.domain = get_tld(self.url)
         self.title = ""
         stream = open(Helper.get_resource_path("test.json"), 'r')
@@ -71,3 +70,6 @@ class Scrapper():
             urls.append(url)
 
         return urls
+
+scrapper = Scrapper()
+print scrapper.scrap()
