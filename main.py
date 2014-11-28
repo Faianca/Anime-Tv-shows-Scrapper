@@ -17,10 +17,10 @@ class Main():
         self.window = Gtk()
         self.mainWindow = Gtk()
         self.player = Player()
+        self.player.create()
 
 
     def clicked(self, widget):
-        self.mainWindow.hide()
         self.start(self.box.get_text())
 
     def go(self):
