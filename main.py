@@ -17,7 +17,6 @@ class Main():
         self.window = Gtk()
         self.mainWindow = Gtk()
         self.player = Player()
-        self.player.create()
 
 
     def clicked(self, widget):

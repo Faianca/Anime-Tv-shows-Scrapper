@@ -12,7 +12,6 @@ from tld import get_tld
 
 class Scrapper():
 
-    t = "http://playpanda.net/embed.php?w=600&h=438&vid=at/nw/terra_formars_-_09.mp4"
     valid_extensions = ['.mp4', '.flv']
 
     def __init__(self, url):

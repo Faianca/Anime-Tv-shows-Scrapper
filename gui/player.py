@@ -10,8 +10,6 @@ class Player():
     def __init__(self):
         self.browser = Browser()
         self.html = Html()
-
-    def create(self):
         self.win = gtk.Window()
         self.win.set_position(gtk.WIN_POS_CENTER)
         self.win.set_size_request(800, 600)
@@ -25,7 +23,6 @@ class Player():
         movie = self.html.create(url)
 
         if self.win.get_window() is None:
-            self.create()
             self.browser.open(movie)
             browser = self.browser.get()
             self.win.add(browser)
