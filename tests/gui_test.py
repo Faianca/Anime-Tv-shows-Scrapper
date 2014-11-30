@@ -2,6 +2,8 @@ import os, sys
 from gi.repository import Gtk, Gdk
 from gi.repository import WebKit
 from gui.html import Html
+from scrapper.scrapper import Scrapper
+
 
 css = """
 #faiancaWindow {
@@ -21,9 +23,19 @@ class UI:
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
+        self.scrapper = Scrapper()
+
         self.html = Html()
         self.builder = Gtk.Builder()
         self.browser = WebKit.WebView()
+        #self.browser.connect("load-finished", self.load_finished)
+
+        #browser_settings = WebKit.WebSettings()
+       # useragent = browser_settings.get_property('user-agent')
+
+        #browser_settings.set_property('user-agent', 'Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10')
+
+        #self.browser.set_settings(browser_settings)
         self.builder.add_from_file(os.path.join(os.getcwd(), 'easy-entry.ui'))
         self.window = self.builder.get_object('faiancaWindow')
         self.window.set_size_request(860, 600)
@@ -44,6 +56,10 @@ class UI:
         self.go_btn.connect('clicked', self.open)
         self.close_btn.connect('clicked', self.quit)
         self.window.show_all()
+
+    def load_finished(self, webview, frame):
+        #self.browser.execute_script("console.log(document.querySelector('#flowplayer div'))")
+        pass
 
     def on_window_state_event(self, widget, event, data=None):
         mask = Gdk.WindowState.FULLSCREEN
@@ -75,9 +91,11 @@ class UI:
         print '%s' % (self.entry.get_text())
 
     def open(self, *args):
-        movie = self.html.create("http://gateway.videofun.me/videos/ongoing/terra_formars_-_10.mp4?st=hbZR4lXuR1PO8zU43TtEYA&e=1417374304&server=videofun")
+        episode = self.scrapper.get_episode("http://www.animehere.com/akame-ga-kill-episode-22.html")
+        link = episode['links'][0]
+        movie = self.html.create(link)
         self.browser.open(movie)
-        self.window.set_title("Terraformars")
+        self.window.set_title(episode['title'])
 
     def quit(self, *args):
         Gtk.main_quit()

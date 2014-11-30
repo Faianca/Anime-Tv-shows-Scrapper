@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script>
+        var blocklist = new Array();
+
+        blocklist["IMG"] = [["src", /.*doubleclick.net.*/],
+                            ["src", /.*last.fm\/adserver.*/]];
+
+        blocklist["SCRIPT"] = [["src", /.*doubleclick.net.*/]];
+
+        blocklist["IFRAME"] = [["src", /.*gogoanime.*/],
+                               ["name", /.*google_ads.*/],
+                               ["id", /.*ad-google.*/]];
+
+        function adblock(event)
+        {
+            var tag = event.target.tagName;
+            if (!blocklist[tag])
+                return;
+            for(var i = 0; i < blocklist[tag].length; i++) {
+                if (event.target.getAttribute(blocklist[tag][i][0])) {
+                    if (event.target.getAttribute(blocklist[tag][i][0]).match(blocklist[tag][i][1])) {
+                        event.preventDefault();
+                        return;
+                    }
+                }
+            }
+        }
+
+        document.addEventListener("beforeload", adblock, true);
+    </script>
+    <style>
+        html {
+        background: black;
+        }
+
+        body {
+                        width:800px;
+                        height:600px;
+                        margin:0
+                    }
+    </style>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<iframe frameborder="0" background="black" width="800" height="600" src="http://videowing.me/embed?w=600&h=438&video=ongoing/terra_formars_-_10.mp4"></iframe>
+</body>
+</html>
+        
