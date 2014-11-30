@@ -92,7 +92,8 @@ class UI:
 
     def open(self, *args):
         episode = self.scrapper.get_episode("http://www.animehere.com/akame-ga-kill-episode-22.html")
-        link = episode['links'][0]
+        link = episode['links'][0][0]
+
         movie = self.html.create(link)
         self.browser.open(movie)
         self.window.set_title(episode['title'])
@@ -101,5 +102,8 @@ class UI:
         Gtk.main_quit()
 
 if __name__ == '__main__':
+    Gdk.threads_init()
+    Gdk.threads_enter()
     ui = UI()
     Gtk.main()
+    Gdk.threads_leave()

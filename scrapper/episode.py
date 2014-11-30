@@ -33,7 +33,7 @@ class Episode():
 
         return {
             'title': self.title,
-            'links': self.links[0]
+            'links': self.links
         }
 
     def _get_title(self, soup):
