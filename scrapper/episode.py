@@ -14,31 +14,31 @@ import os
 class Episode():
 
     valid_extensions = ['.mp4', '.flv']
+    bad_domains = ['facebook']
     title = ''
     links = []
 
     def __init__(self, scrapper_json):
         self.scrapper_json = scrapper_json
 
-    def episode(self, url):
+    def scrap(self, url):
         response = requests.get(url)
         soup = bs4.BeautifulSoup(response.text)
-        self.title = self._get_title(soup)
-        self.links = self._get_links(soup)
+        self._get_title(soup)
+        self._get_links(soup)
 
-    def get_title(self):
-        return self.title
+    def get(self):
 
-    def get_links(self):
-        return self.links
+        return {
+            'title': self.title,
+            'link': self.links[0]
+        }
 
     def _get_title(self, soup):
         title = soup.find(self.scrapper_json['title']['tag'])
 
         if 'split' in self.scrapper_json['title']:
-            title = title.text.split(self.scrapper_json['title']['split'])[0]
-
-        return title
+            self.title = title.text.split(self.scrapper_json['title']['split'])[0]
 
     def _get_links(self, soup):
         urls = []
@@ -65,9 +65,7 @@ class Episode():
                 if 'sub' in values:
                     li = self._get_link(link_url, values['sub'])
                     if li:
-                        urls.append(li)
-
-        return urls
+                        self.links.append(li)
 
     def _get_link(self, url, sub):
 
