@@ -16,7 +16,7 @@ sys.setdefaultencoding("utf-8")
 class Episode():
 
     valid_extensions = ['.mp4', '.flv']
-    bad_domains = ['facebook']
+    bad_domains = ['facebook', 'ad_iframe']
     title = ''
     links = []
 
@@ -55,13 +55,7 @@ class Episode():
             for link in links:
                 link_url = link.get(values['attr'])
 
-                bad_flag = False
-                for bad_domain in self.bad_domains:
-                    if bad_domain in link_url:
-                        bad_flag = True
-                        break
-
-                if bad_flag:
+                if self.bad_url(link_url):
                     continue
 
                 if 'sub' in values:
@@ -86,6 +80,9 @@ class Episode():
 
             url = urllib.unquote(url.group("url")).decode('utf8')
 
+            if self.bad_url(url):
+                continue
+
             name, ext = os.path.splitext(url)
 
             if not ext[len(filter(ext.startswith, self.valid_extensions+[''])[0]):]:
@@ -94,6 +91,15 @@ class Episode():
             urls.append(url)
 
         return urls
+
+    def bad_url(self, url):
+        bad_flag = False
+        for bad_domain in self.bad_domains:
+            if bad_domain in url:
+                bad_flag = True
+                break
+
+        return bad_flag
 
 
 class EpisodeSimple():
