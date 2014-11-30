@@ -8,18 +8,24 @@ import os
 from gui.helper import Helper
 import json
 from tld import get_tld
-
+from series import Series
 
 class Scrapper():
 
     valid_extensions = ['.mp4', '.flv']
 
-    def __init__(self, url):
-        self.url = url
-        self.domain = get_tld(self.url)
+    def __init__(self):
         self.title = ""
         stream = open(Helper.get_resource_path("test.json"), 'r')
         self.scrap_info = json.load(stream)
+
+    def get_series(self, url):
+        domain = get_tld(url)
+        scrap_info = self.scrap_info[domain]['series']['css_path']
+        series = Series(scrap_info)
+        series.scrap(url)
+
+        return series.get()
 
     def scrap(self):
         response = requests.get(self.url)
