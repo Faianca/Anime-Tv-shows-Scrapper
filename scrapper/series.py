@@ -10,15 +10,17 @@ import bs4
 import requests
 from tld import get_tld
 
-
+'''
+Tries to simulate a struct
+'''
 class EpisodeLink():
     href = ''
     title = ''
 
-    def __init__(self):
-        pass
-
-
+'''
+Loads json file to scrapp through
+css_path the content we need
+'''
 class Series():
 
     title = ''
@@ -54,6 +56,10 @@ class Series():
             'episodes': self.episodes
         }
 
+    '''
+    Scrapps the show info
+    Title, stars, images etc..
+    '''
     def _description(self, soup):
 
         try:
@@ -71,6 +77,9 @@ class Series():
             print Exception
             raise
 
+    '''
+    Scraps all links in a css_path
+    '''
     def _get_episodes(self, soup):
 
         links = soup.select(self.scrapper_json['episodes']['css_path'])
