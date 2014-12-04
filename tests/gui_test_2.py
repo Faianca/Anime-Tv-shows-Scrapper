@@ -3,7 +3,8 @@ from gi.repository import Gtk, Gdk
 from gi.repository import WebKit
 from gui.html import Html
 from scrapper.scrapper import Scrapper
-
+from scrapper.search import Search
+from helpers.drawers import Grid
 
 css = """
 #faiancaWindow {
@@ -14,6 +15,10 @@ css = """
 
 
 class UI:
+
+
+    grid = ""
+
     def __init__(self):
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(css)
@@ -23,33 +28,24 @@ class UI:
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
-        self.scrapper = Scrapper()
-
-        self.html = Html()
         self.builder = Gtk.Builder()
-        self.browser = WebKit.WebView()
-        #self.browser.connect("load-finished", self.load_finished)
-
-        #browser_settings = WebKit.WebSettings()
-       # useragent = browser_settings.get_property('user-agent')
-
-        #browser_settings.set_property('user-agent', 'Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10')
-
-        #self.browser.set_settings(browser_settings)
         self.builder.add_from_file(os.path.join(os.getcwd(), 'easy-entry.ui'))
         self.window = self.builder.get_object('faiancaWindow')
         self.window.set_size_request(860, 600)
 
         self.go_btn = self.builder.get_object('go_btn')
         self.close_btn = self.builder.get_object('close_btn')
-        self.entry = self.builder.get_object('searchInput')
+        self.entry = self.builder.get_object('searchinput')
 
         self.left_pane = self.builder.get_object('box2')
         self.player_frame = self.builder.get_object('viewport1')
+        self.links_frame = self.builder.get_object('links')
         self.mainBox = self.builder.get_object('box1')
-        self.player_frame.add(self.browser)
 
-        #self.list_episode()
+        self.grid_helper = Grid()
+
+        self.grid = self.grid_helper.get()
+        self.links_frame.add(self.grid)
 
         self.window.connect("window-state-event", self.on_window_state_event)
         self.window.connect('delete-event', self.quit)
@@ -57,9 +53,8 @@ class UI:
         self.close_btn.connect('clicked', self.quit)
         self.window.show_all()
 
-    def load_finished(self, webview, frame):
-        #self.browser.execute_script("console.log(document.querySelector('#flowplayer div'))")
-        pass
+    def on_searchinput_activate(self, widget):
+        print "sadads"
 
     def on_window_state_event(self, widget, event, data=None):
         mask = Gdk.WindowState.FULLSCREEN
@@ -72,34 +67,20 @@ class UI:
             self.left_pane.set_visible(True)
             self.mainBox.set_homogeneous(False)
 
-    def list_episode(self):
-        grid = Gtk.Grid()
-
-        button1 = Gtk.Button(label="Button 1")
-        button2 = Gtk.Button(label="Button 2")
-        button3 = Gtk.Button(label="Button 3")
-        button4 = Gtk.Button(label="Button 4")
-        button5 = Gtk.Button(label="Button 5")
-        button6 = Gtk.Button(label="Button 6")
-        grid.add(button1)
-        grid.attach(button2, 1, 0, 2, 1)
-        grid.attach(button5, 1, 1, 1, 1)
-
-        self.player_frame.add(grid)
-
-    def print_text(self, *args):
-        print '%s' % (self.entry.get_text())
+    def serie_clicked(self, widget, link):
+        print link
 
     def open(self, *args):
-        #episode = self.scrapper.get_episode("http://www.animehere.com/anime/terra-formars.html")
-        serie = self.scrapper.get_series("http://www.animehere.com/anime/terra-formars.html")
-        episode = self.scrapper.get_episode(serie['episodes'][0].href)
-        print episode
-        link = episode['links'][0][0]
+        search = Search()
+        links = search.search(self.entry.get_text())
 
-        movie = self.html.create(link)
-        self.browser.open(movie)
-        self.window.set_title(episode['title'])
+        for link in links:
+            button1 = Gtk.Button(label=link.title)
+            button1.connect("clicked", self.serie_clicked, link.link)
+            self.grid_helper.add_widget(button1)
+
+        self.grid_helper.refresh()
+        self.window.show_all()
 
     def quit(self, *args):
         Gtk.main_quit()

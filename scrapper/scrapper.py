@@ -11,6 +11,7 @@ from tld import get_tld
 from series import Series
 from episode import Episode, EpisodeSimple
 
+
 class Scrapper():
 
     valid_extensions = ['.mp4', '.flv']
