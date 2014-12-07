@@ -21,6 +21,7 @@ class Search():
         pass
 
     def search(self, keyword):
+        self.href = []
         url = "http://www.animehere.com/search.html?keyword="+keyword
         response = requests.get(url)
         soup = bs4.BeautifulSoup(response.text)

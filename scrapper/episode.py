@@ -16,7 +16,7 @@ sys.setdefaultencoding("utf-8")
 class Episode():
 
     valid_extensions = ['.mp4', '.flv']
-    bad_domains = ['facebook', 'ad_iframe']
+    bad_domains = ['facebook', 'ad_iframe', 'showads']
     title = ''
     links = []
 

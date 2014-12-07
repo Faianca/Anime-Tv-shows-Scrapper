@@ -5,8 +5,8 @@ from gi.repository import Gtk
 class Grid():
 
     widget_list = []
-    WIDGET_SIZE = 140
-    COLS = 1
+    WIDGET_SIZE = 100
+    COLS = 4
     NUM = 100
     grid = ""
 
@@ -17,6 +17,7 @@ class Grid():
         grid.set_column_homogeneous(True)
         grid.set_row_homogeneous(False)
         grid.set_border_width(0)
+        grid.set_size_request(100, 100)
         self.grid = grid
 
     def add_widget(self, widget):
@@ -24,7 +25,9 @@ class Grid():
 
     def refresh(self):
         self.remove_widgets()
-        self.load_widgets()
+
+    def hide(self):
+        self.grid.hide()
 
     def get(self):
         return self.grid
@@ -52,6 +55,8 @@ class Grid():
 
         for wid in self.grid.get_children():
             self.grid.remove(wid)
+
+        self.widget_list[:] = []
 
     def load_widgets(self):
         i,j = 0,0

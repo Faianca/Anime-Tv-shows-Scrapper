@@ -1,12 +1,12 @@
 __author__ = 'jmeireles'
 
-import webkit
+from gi.repository import WebKit
 
 
 class Browser():
 
     def __init__(self):
-        self.browser = webkit.WebView()
+        self.browser = WebKit.WebView()
         self.browser.connect("load-finished", self.load_finished)
 
     def load_html(self, html):

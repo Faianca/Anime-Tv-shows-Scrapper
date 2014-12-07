@@ -47,6 +47,7 @@ class UI:
         self.grid = self.grid_helper.get()
         self.links_frame.add(self.grid)
 
+        self.entry.connect("activate", self.on_searchinput_activate)
         self.window.connect("window-state-event", self.on_window_state_event)
         self.window.connect('delete-event', self.quit)
         self.go_btn.connect('clicked', self.open)
@@ -54,7 +55,7 @@ class UI:
         self.window.show_all()
 
     def on_searchinput_activate(self, widget):
-        print "sadads"
+        self.open()
 
     def on_window_state_event(self, widget, event, data=None):
         mask = Gdk.WindowState.FULLSCREEN

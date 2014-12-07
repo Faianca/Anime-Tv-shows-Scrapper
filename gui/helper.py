@@ -20,5 +20,4 @@ class Helper():
     @staticmethod
     def exists(url):
         r = requests.head(url)
-
         return r.status_code in Helper.codes

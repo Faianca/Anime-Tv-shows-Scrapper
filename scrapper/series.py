@@ -65,7 +65,7 @@ class Series():
         try:
             self.title = soup.select(self.scrapper_json['title'])[0].text
             self.stars = soup.select(self.scrapper_json['stars'])[0].text
-            self.description = soup.select(self.scrapper_json['description'])[0].text
+            #self.description = soup.select(self.scrapper_json['description'])[0].text
             self.image = self.external_domain + soup.select(self.scrapper_json['image'])[0].get('src')
             self.date = soup.select(self.scrapper_json['date'])[0].text
             genres_tmp = soup.select(self.scrapper_json['genres']['css_path'])
