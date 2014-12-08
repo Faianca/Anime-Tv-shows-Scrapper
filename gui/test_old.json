@@ -1,0 +1,50 @@
+{
+  "animehere.com":
+  {
+    "series": {
+      "css_path": {
+        "title": "body > section.content.cfix > section.maincontent > section > div > h1",
+        "stars": "#rateresult > span.point",
+        "description": "body > section.content.cfix > section.maincontent > section > article > section > p:nth-of-type(6)",
+        "image": "body > section.content.cfix > section.maincontent > section > article > div > img",
+        "date": "body > section.content.cfix > section.maincontent > section > article > section > p > span > a",
+        "genres": {
+          "css_path": "body > section.content.cfix > section.maincontent > section > article > section > p:nth-of-type(5) > a",
+          "multi": true
+      },
+        "episodes": {
+              "css_path": "section.date-list a",
+              "multi": true
+        }
+      }
+    },
+    "episode": {
+      "css_path": {
+        "title": "",
+        "links": ""
+      }
+    }
+  },
+  "anime-exceed.com":
+  {
+    "episode": {
+      "title": {
+        "tag": "title",
+        "split": " | "
+      },
+      "video": {
+        "tag": {
+          "iframe": {
+            "all": true,
+            "attr": "src",
+            "sub": {
+              "tag": "script",
+              "all": true,
+              "regex": "(%3FP%3Curl%3Ehttps%3F%3A%2F%2F%5B%5E%5Cs%22%5D%2B)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

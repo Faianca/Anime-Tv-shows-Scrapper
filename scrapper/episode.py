@@ -10,8 +10,8 @@ import re
 import urllib
 import os
 import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
+from gui.helper import Helper
+
 
 class Episode():
 
@@ -115,8 +115,8 @@ class EpisodeSimple():
     def scrap(self, url):
         response = requests.get(url)
         soup = bs4.BeautifulSoup(response.text)
-        self._get_title(soup)
-        self._get_links(soup)
+        self._get_title_simple(soup)
+        self._get_links_simple(soup)
 
     def get(self):
 
@@ -130,6 +130,19 @@ class EpisodeSimple():
 
         if 'split' in self.scrapper_json['title']:
             self.title = title.text.split(self.scrapper_json['title']['split'])[0]
+
+    def _get_title_simple(self, soup):
+        title = soup.select(self.scrapper_json['title'])[0]
+        self.title = title.get_text()
+
+    def _get_links_simple(self, soup):
+
+        links = soup.select(self.scrapper_json['links'])
+        for link in links:
+            link_src = link.get('src')
+            link_src = Helper.set_query_parameter(link_src, 'h', '595')
+            link_src = Helper.set_query_parameter(link_src, 'w', '780')
+            self.links.append(link_src)
 
     def _get_links(self, soup):
         urls = []

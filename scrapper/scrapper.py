@@ -39,7 +39,7 @@ class Scrapper():
 
     def get_episode_simple(self, url):
         domain = get_tld(url)
-        scrap_info = self.scrap_info[domain]['episode']
+        scrap_info = self.scrap_info[domain]['episode']['css_path']
         episode = EpisodeSimple(scrap_info)
         episode.scrap(url)
 

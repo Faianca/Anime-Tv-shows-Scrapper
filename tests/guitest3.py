@@ -6,7 +6,7 @@ from scrapper.search import Search
 from helpers.drawers import Grid
 from gi.repository.GdkPixbuf import Pixbuf
 from gi.repository import Gio
-from gui.player import Player
+from gui.player import Player2
 
 css = """
 #faiancaWindow {
@@ -29,7 +29,7 @@ class UI:
             style_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
-        self.player = Player()
+        self.player = Player2()
         self.scrapper = Scrapper()
         self.builder = Gtk.Builder()
         self.builder.add_from_file(os.path.join(os.getcwd(), 'gui2.glade'))
@@ -74,9 +74,10 @@ class UI:
         self.show_links(serie)
 
     def episode_clicked(self, widget, event, link):
-        links = self.scrapper.get_episode(link.href)['links']
+        links = self.scrapper.get_episode_simple(link.href)['links']
+        self.player.set_links(links)
         self.player.set_title(link.title)
-        self.player.open(links[0][0])
+        self.player.open(links[0])
 
     def go_back(self, widget):
         self.test_frame.hide()
