@@ -1,23 +1,34 @@
-from gi.repository import Gtk
+import kivy
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.videoplayer import VideoPlayer
+from kivy.lang import Builder
 
-class MyExample(Gtk.Window):
-    def __init__(self):
-        Gtk.Window.__init__(self)
-        self.connect("delete-event", Gtk.main_quit)
+Builder.load_string ('''
+<MyVideoPlayer>:
+    orientation: "vertical"
+    VideoPlayer:
+        source: "http://www.animehere.com/terra-formars-episode-10.html"
+    Button:
+        text: "Add Video Dynamically"
+        on_press: root.add(*args)
+    Button:
+        text: "Change video Dynamically"
+        on_press: root.change(*args)
+''')
 
-        liststore = Gtk.ListStore(str)
-        for match in ["test1", "test2", "test3", "spam", "foo", "eggs", "bar"]:
-            liststore.append([match])
+class MyVideoPlayer(BoxLayout):
 
-        completion = Gtk.EntryCompletion()
-        completion.set_model(liststore)
-        completion.set_text_column(0)
+    def add(self, instance):
+        self.video_player = VideoPlayer(source = "http://www.animehere.com/terra-formars-episode-10.html")
+        self.add_widget(self.video_player)
 
-        entry = Gtk.Entry()
-        entry.set_completion(completion)
-        self.add(entry)
-        self.show_all()
+    def change(self, instance):
+        self.video_player.source = "http://www.animehere.com/terra-formars-episode-10.html"
 
-if __name__ == "__main__":
-    app = MyExample()
-    Gtk.main()
+class MyVideoPlayerApp(App):
+    def build(self):
+        return MyVideoPlayer()
+
+if __name__ == '__main__':
+    MyVideoPlayerApp().run()

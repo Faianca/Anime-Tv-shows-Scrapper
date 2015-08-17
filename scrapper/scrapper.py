@@ -9,7 +9,7 @@ from gui.helper import Helper
 import json
 from tld import get_tld
 from series import Series
-from episode import Episode, EpisodeSimple
+from episode import Episode
 
 
 class Scrapper():
@@ -33,14 +33,6 @@ class Scrapper():
         domain = get_tld(url)
         scrap_info = self.scrap_info[domain]['episode']
         episode = Episode(scrap_info)
-        episode.scrap(url)
-
-        return episode.get()
-
-    def get_episode_simple(self, url):
-        domain = get_tld(url)
-        scrap_info = self.scrap_info[domain]['episode']['css_path']
-        episode = EpisodeSimple(scrap_info)
         episode.scrap(url)
 
         return episode.get()

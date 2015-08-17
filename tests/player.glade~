@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
+<!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
+    <property name="gravity">south-west</property>
     <child>
       <object class="GtkBox" id="mainBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkScrolledWindow" id="left">
+          <object class="GtkViewport" id="top">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="resize_mode">queue</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="vscrollbar_policy">never</property>
+            <property name="can_focus">False</property>
             <child>
               <placeholder/>
             </child>
@@ -26,10 +25,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="right">
+          <object class="GtkViewport" id="left">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
             <child>
               <placeholder/>
             </child>
@@ -42,5 +40,8 @@
         </child>
       </object>
     </child>
+    <style>
+      <class name="GtkComboBox {  background-color: #000000;}"/>
+    </style>
   </object>
 </interface>

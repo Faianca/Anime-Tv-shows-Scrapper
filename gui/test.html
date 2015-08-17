@@ -1,58 +1,45 @@
 
-        <html>
-    <head>
-        <script type="text/javascript" src="/home/jmeireles/PycharmProjects/anime/gui/jwplayer.js"></script>
-        <script type="text/javascript">jwplayer.key="sZhno26KBTT4wkrwM5dYR7Gv2ncG0T/DTjmDlQ==";</script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <title>tete</title>
-        <style>
-            html {
-                background: black;
-            }
+        <!DOCTYPE HTML>
+<html>
+<head>
+    <title>Projekktor - simply mighty video</title>
+    <style type="text/css">
+    body { background-color:#000;; padding:0; margin:0; }
+    </style>
 
-            body {
-                margin:0 auto;
-                color: white;
-            }
-            #episodes::-webkit-scrollbar {
-                width: 1em;
-            }
+    <!-- Load player theme -->
+    <link rel="stylesheet" href="/home/jmeireles/Anime-Tv-shows-Scrapper/themes/maccaco/projekktor.style.css" type="text/css" media="screen" />
 
-            #episodes::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    <!-- Load jquery -->
+    <script type="text/javascript" src="/home/jmeireles/Anime-Tv-shows-Scrapper/jquery-1.9.1.min.js"></script>
+
+    <!-- load projekktor -->
+    <script type="text/javascript" src="/home/jmeireles/Anime-Tv-shows-Scrapper/projekktor-1.3.09.min.js"></script>
+
+</head>
+<body>
+    <div id="player_a" class="projekktor"></div>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+        projekktor('#player_a', {
+        //poster: '/home/jmeireles/Anime-Tv-shows-Scrapper/media/intro.png',
+        title: 'this is projekktor',
+        autoplay: true,
+        playerFlashMP4: '/home/jmeireles/Anime-Tv-shows-Scrapper/swf/StrobeMediaPlayback/StrobeMediaPlayback.swf',
+        playerFlashMP3: '/home/jmeireles/Anime-Tv-shows-Scrapper/swf/StrobeMediaPlayback/StrobeMediaPlayback.swf',
+        width: 860,
+        height: 600,
+        videoScaling: "aspectratio",
+        playlist: [
+            {
+            0: {src: "https://r9---sn-ab5e6m7r.googlevideo.com/videoplayback?requiressl=yes&id=ff45e721b5f910a2&itag=18&source=picasa&ip=154.43.167.36&ipbits=0&expire=1439841509&sparams=expire,id,ip,ipbits,itag,mm,mn,ms,mv,nh,pl,requiressl,source&signature=737826CFA276CB04583B142A16912442B5AAC613.322D8C8D33D7454FA203CF9317D38AAB59DB887F&key=cms1&cms_redirect=yes&mm=31&mn=sn-ab5e6m7r&ms=au&mt=1439812587&mv=m&nh=EAI&pl=24", type: "video/mp4"},
             }
-
-            #episodes::-webkit-scrollbar-thumb {
-              background-color: green;
-              outline: 1px solid slategrey;
-            }
-            ul {
-            padding:5px;
-            }
-            #player { float:left; }
-
-        </style>
-    </head>
-    <body>
-    <div id="player">
-         <div id="myElement">Loading the player...</div>
-    </div>
-    <div id="episodes">
-        <ul id="episodes-list">
-        </ul>
-    </div>
-
-            <script type="text/javascript">
-                jwplayer("myElement").setup({
-                    autostart: true,
-                    timeoutInSeconds: 20,
-                    height: 600,
-                    width: 800,
-                    file: "http://videofun.me/embed?h=600&video=ongoing%2Fterra_formars_-_01.mp4&w=800"
-                });
-
-            </script>
-    </body>
-    </html>
+        ]
+        }, function(player) {} // on ready
+        );
+    });
+    </script>
+</html>
 
         

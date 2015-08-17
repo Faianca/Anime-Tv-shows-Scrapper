@@ -19,9 +19,23 @@
       }
     },
     "episode": {
-      "css_path": {
-        "title": "",
-        "links": ""
+      "title": {
+        "tag": "title",
+        "split": " - ",
+        "links": "#playbox > p > iframe"
+      },
+     "video": {
+        "tag": {
+          "iframe": {
+            "all": true,
+            "attr": "src",
+            "sub": {
+              "tag": "script",
+              "all": true,
+              "regex": "https%3F%3A%2F%2F%5B%5E%5Cs%5D%2B.(%3F%3Amp4%7Cmpg%7Cavi)%5B%5E%5Cs%22%27%5D%2B"
+            }
+          }
+        }
       }
     }
   },
