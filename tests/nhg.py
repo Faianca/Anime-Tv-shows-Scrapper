@@ -7,7 +7,7 @@ Gdk.threads_enter()
 player = Player()
 
 spider = Spider()
-link = spider.fetch("http://videowing.me/embed?w=600&h=438&video=ongoing/the_japan_animator_expo_-_26.mp4")
+link = spider.fetch("http://vodlocker.com/embed-5fw744toleey-650x370.html")
 #player.set_title("etas")
 player.open(link)
 

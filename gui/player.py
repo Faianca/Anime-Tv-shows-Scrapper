@@ -15,7 +15,7 @@ class Player:
         self.browser = Browser()
         self.html = Html()
         self.builder = Gtk.Builder()
-        self.builder.add_from_file(os.path.join(os.getcwd(), 'gui/src/player.glade'))
+        self.builder.add_from_file(os.path.join(os.getcwd(), '../gui/src/player.glade'))
         self.win = self.builder.get_object('mainWindow')
         self.win.set_size_request(860, 600)
 
