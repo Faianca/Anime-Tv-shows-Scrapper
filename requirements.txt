@@ -4,7 +4,7 @@ CDBashApplet==1.0
 Landscape-Client==14.01
 MplayerCtrl==0.3.3
 PAM==0.4.2
-Pillow==2.3.0
+Pillow==6.2.0
 PyInstaller==2.1
 PyYAML==3.11
 SQLAlchemy==0.9.8
