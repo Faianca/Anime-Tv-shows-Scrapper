@@ -6,7 +6,7 @@ MplayerCtrl==0.3.3
 PAM==0.4.2
 Pillow==2.3.0
 PyInstaller==2.1
-PyYAML==3.11
+PyYAML==5.4
 SQLAlchemy==0.9.8
 Scrapy==0.24.4
 Twisted==13.2.0
