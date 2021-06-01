@@ -93,7 +93,7 @@ tldextract==1.5.1
 uTidylib==0.2
 ubuntu-tweak==0.8.8
 unity-lens-photos==1.0
-urllib3==1.7.1
+urllib3==1.26.5
 var-dump==1.0.1
 vboxapi==1.0
 w3lib==1.10.0
