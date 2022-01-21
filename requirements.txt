@@ -45,7 +45,7 @@ gyp==0.1
 html5lib==0.999
 httplib2==0.8
 iotop==0.6
-ipython==1.2.1
+ipython==7.16.3
 lockfile==0.8
 lxml==3.3.3
 mpylayer==0.2a1
