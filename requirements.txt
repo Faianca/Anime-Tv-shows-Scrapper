@@ -8,7 +8,7 @@ Pillow==2.3.0
 PyInstaller==2.1
 PyYAML==3.11
 SQLAlchemy==0.9.8
-Scrapy==0.24.4
+Scrapy==1.8.2
 Twisted==13.2.0
 Twisted-Conch==13.2.0
 Twisted-Core==13.2.0
