@@ -77,7 +77,7 @@ pytz==2012c
 pyxdg==0.25
 queuelib==1.2.2
 rabbitvcs==0.15.2
-reportlab==3.0
+reportlab==3.5.55
 requests==2.2.1
 screenlets==0.1.6
 screenlets-pack-basic==0.1.6
