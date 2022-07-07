@@ -78,7 +78,7 @@ pyxdg==0.25
 queuelib==1.2.2
 rabbitvcs==0.15.2
 reportlab==3.0
-requests==2.2.1
+requests==2.20.0
 screenlets==0.1.6
 screenlets-pack-basic==0.1.6
 sessioninstaller==0.0.0
